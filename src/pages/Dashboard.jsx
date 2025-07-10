@@ -34,12 +34,12 @@ const Dashboard = ({ email, token, jiraDomain, onLogout }) => {
             projectPriorityScore: projectPriorityMap[task.project] || 0,
           }));
           setTasks(transformedTasks);
-          console.log("Tasks from backend:", transformedTasks);
+          //console.log("Tasks from backend:", transformedTasks);
         } else {
           alert("Failed to fetch tasks");
         }
       } catch (err) {
-        console.error(err);
+        //console.error(err);
         alert("Error fetching tasks");
       }
     };
@@ -66,14 +66,7 @@ const Dashboard = ({ email, token, jiraDomain, onLogout }) => {
     : tasks;
 
   const saveChanges = async (field, value, task) => {
-    console.log(
-      "🛠 Saving field:",
-      field,
-      "with value:",
-      value,
-      "for issue:",
-      task.key
-    );
+    //console.log("🛠 Saving field:",field,"with value:", value,"for issue:",task.key);
     try {
       const response = await fetch("http://localhost:5000/jira-update", {
         method: "POST",
@@ -89,14 +82,14 @@ const Dashboard = ({ email, token, jiraDomain, onLogout }) => {
       });
 
       const result = await response.json();
-      console.log("Response from backend:", result);
+      //console.log("Response from backend:", result);
       if (!result.success) {
         alert("Failed to update Jira");
       } else {
         console.log(`✅ ${field} updated for issue ${task.key}`);
       }
     } catch (err) {
-      console.error("Error updating Jira:", err);
+      //console.error("Error updating Jira:", err);
       alert("Backend error while updating Jira");
     }
 
